@@ -20,7 +20,7 @@
     -->
 
     <script id='article-template' type='text/x-handlebars/template'> 
-      <article data-category="{{category}}">
+      <article data-category="{{category}}" data-author="{{author}}">
       <header>
         <h1>{{ title }}</h1>
         <div>
@@ -31,6 +31,12 @@
         <section class="article-body">{{{ body }}}</section>
         <a href="#" class="read-on">Read on &rarr;</a>
     </article> 
+  </script>
+  <script id="author-filter-template" type="text/x-handlebars/template">
+    <option value="{{author}}">{{author}}</option>
+  </script>
+  <script id="category-filter-template" type="text/x-handlebars/template">
+    <option value="{{category}}">{{category}}</option>
   </script>
   </head>
   <body>

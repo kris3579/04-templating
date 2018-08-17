@@ -2,27 +2,19 @@
 
 let articleView = {};
 
-// TODO: Where possible, refactor methods into arrow functions, including the document.ready() method at the bottom.
+// Where possible, refactor methods into arrow functions, including the document.ready() method at the bottom.
 
-// COMMENT: How do arrow functions affect the context of "this"? How did you determine if a function could be refactored?
-// PUT YOUR RESPONSE HERE
+// How do arrow functions affect the context of "this"? How did you determine if a function could be refactored?
+// Arrow functions affect what "this" refers to - they do not have their own context. There was no issue changing the articleView methods to arrow functions, as well as the $(document).ready, because none of these need their own "this". The inner functions need "this", so the arrow functions do not work.
 
 articleView.populateFilters = () => {
-  $('article').each(function() {
-    if (!$(this).hasClass('template')) {
-      let val = $(this).find('address a').text();
-      let optionTag = `<option value="${val}">${val}</option>`;
-
-      if ($(`#author-filter option[value="${val}"]`).length === 0) {
-        $('#author-filter').append(optionTag);
-      }
-
-      val = $(this).attr('data-category');
-      optionTag = `<option value="${val}">${val}</option>`;
-      if ($(`#category-filter option[value="${val}"]`).length === 0) {
-        $('#category-filter').append(optionTag);
-      }
-    }
+  $(rawData).each(function() {
+    let compiledTemplate = Handlebars.compile($('#author-filter-template').html());
+    $('#author-filter').append(compiledTemplate(this));
+  });
+  $(rawData).each(function() {
+    let compiledTemplate = Handlebars.compile($('#category-filter-template').html());
+    $('#category-filter').append(compiledTemplate(this));
   });
 };
 
